@@ -6,5 +6,5 @@ A Flask application implementing Google OAuth 2.0 authentication.
 
 1. Clone the repository
 ```bash
-git clone <your-repo-url>
-cd <repo-name>
+git clone https://github.com/mohitsha888/login-with-socialmedia
+cd login-with-socialmedia

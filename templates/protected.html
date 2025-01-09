@@ -6,9 +6,10 @@
 </head>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold mb-6">Welcome {{ name }}!</h1>
-        <p class="mb-4">Email: {{ email }}</p>
-        <div class="flex justify-center">
+        <div class="flex flex-col items-center">
+            <img src="{{ picture }}" alt="Profile" class="w-20 h-20 rounded-full mb-4">
+            <h1 class="text-2xl font-bold mb-2">Welcome {{ name }}!</h1>
+            <p class="mb-4">Email: {{ email }}</p>
             <a href="{{ url_for('logout') }}" 
                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
                 Logout

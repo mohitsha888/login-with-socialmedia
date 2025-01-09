@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 import requests
 
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 load_dotenv()
 
@@ -38,10 +39,11 @@ def login():
 
 @app.route("/callback")
 def callback():
-    if 'state' not in session:
-        return redirect(url_for('index'))
-    
     try:
+        if 'state' not in session:
+            return redirect(url_for('index'))
+    
+
         flow.fetch_token(authorization_response=request.url)
 
         if not session["state"] == request.args["state"]:
@@ -60,9 +62,12 @@ def callback():
         session["google_id"] = id_info.get("sub")
         session["name"] = id_info.get("name")
         session["email"] = id_info.get("email")
+        session["picture"] = id_info.get("picture")
         return redirect(url_for("protected_area"))
+    
     except Exception as e:
-        print(f"Error in callback: {e}")
+        print(f"Error in callback: {str(e)}")
+        session.clear()
         return redirect(url_for('index'))
 
 @app.route("/logout")
@@ -74,7 +79,7 @@ def logout():
 def protected_area():
     if "google_id" not in session:
         return redirect(url_for("index"))
-    return render_template('protected.html', name=session['name'], email=session['email'])
+    return render_template('protected.html', name=session['name'], email=session['email'], picture=session['picture'])
 
 if __name__ == "__main__":
     app.run(debug=True)

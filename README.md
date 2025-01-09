@@ -2,6 +2,8 @@
 
 A Flask application implementing Google OAuth 2.0 authentication.
 
+![alt text](templates/login.png)
+
 ## Setup
 
 1. Clone the repository
